@@ -1,0 +1,30 @@
+[
+  {
+    "name": "After Effects",
+    "shortcut": "Ae",
+    "proficiency": "95%",
+    "color": "#8b8bff",
+    "bgClass": "bg-[#00005b] text-[#9999FF]"
+  },
+  {
+    "name": "Premiere Pro",
+    "shortcut": "Pr",
+    "proficiency": "90%",
+    "color": "#ea77ff",
+    "bgClass": "bg-[#00005b] text-[#ea77ff]"
+  },
+  {
+    "name": "DaVinci Resolve",
+    "shortcut": "Dr",
+    "proficiency": "85%",
+    "color": "#ff5555",
+    "isCustomLogo": true
+  },
+  {
+    "name": "Illustrator",
+    "shortcut": "Ai",
+    "proficiency": "85%",
+    "color": "#ff9a00",
+    "bgClass": "bg-[#330000] text-[#ff9a00]"
+  }
+]

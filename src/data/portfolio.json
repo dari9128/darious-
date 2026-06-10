@@ -1,0 +1,290 @@
+{
+  "portfolioItems": [
+    {
+      "id": 1,
+      "title": "Short Content 1",
+      "category": "short",
+      "youtubeId": "TMk-TsADGl4",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 2,
+      "title": "Short Content 2",
+      "category": "short",
+      "youtubeId": "ttDohUd8lvI",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 3,
+      "title": "Short Content 3",
+      "category": "short",
+      "youtubeId": "bFYzuDcIvhY",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 4,
+      "title": "Short Content 4",
+      "category": "short",
+      "youtubeId": "Z95rKtlD0TI",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 5,
+      "title": "YouTube Video 1",
+      "category": "video",
+      "youtubeId": "PXAWZ4bqgZc",
+      "aspect": "aspect-video",
+      "colSpan": "col-span-2"
+    },
+    {
+      "id": 7,
+      "title": "Motion Graphic 1",
+      "category": "motion",
+      "youtubeId": "nwk7n-vhV20",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 8,
+      "title": "Motion Graphic 2",
+      "category": "motion",
+      "youtubeId": "Tirg4modvOs",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 9,
+      "title": "Motion Graphic 3",
+      "category": "motion",
+      "youtubeId": "L-1LodgzmdI",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 11,
+      "title": "AI Video 1",
+      "category": "ai",
+      "youtubeId": "JnYsR3hwjvE",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 12,
+      "title": "AI Video 2",
+      "category": "ai",
+      "youtubeId": "ogIa9s35sbU",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 13,
+      "title": "AI Video 3",
+      "category": "ai",
+      "youtubeId": "qh7Bg5fJZz4",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 14,
+      "title": "YouTube Video 3",
+      "category": "video",
+      "youtubeId": "HlpfnelcgmM",
+      "aspect": "aspect-video",
+      "colSpan": "col-span-2"
+    },
+    {
+      "id": 15,
+      "title": "YouTube Video 4",
+      "category": "video",
+      "youtubeId": "RZQTOIF7juY",
+      "aspect": "aspect-video",
+      "colSpan": "col-span-2"
+    },
+    {
+      "id": 16,
+      "title": "YouTube Video 5",
+      "category": "video",
+      "youtubeId": "qLGFhbyxgPw",
+      "aspect": "aspect-video",
+      "colSpan": "col-span-2"
+    },
+    {
+      "id": 17,
+      "title": "Long Form Video",
+      "category": "video",
+      "youtubeId": "ZeeP3NSIL9E",
+      "aspect": "aspect-video",
+      "colSpan": "col-span-2"
+    },
+    {
+      "id": 18,
+      "title": "Creative Design 1",
+      "category": "creatives",
+      "image": "/src/assets/images/399d97bb36bfdcfc171b98df55c3d5fb.webp",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 19,
+      "title": "Creative Design 2",
+      "category": "creatives",
+      "image": "/src/assets/images/5aac886fcf881dbfba5a0d87c80c3e4a.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 20,
+      "title": "Creative Design 3",
+      "category": "creatives",
+      "image": "/src/assets/images/890a1a487efba190057ef262be702fa4.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 21,
+      "title": "Creative Design 4",
+      "category": "creatives",
+      "image": "/src/assets/images/a394f2df4ae868348f97686fc0d24f49.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 22,
+      "title": "Creative Design 5",
+      "category": "creatives",
+      "image": "/src/assets/images/a658674fa4a87b05bf346e4617536f92.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 23,
+      "title": "Creative Design 6",
+      "category": "creatives",
+      "image": "/src/assets/images/acc110e0109bd3066a71da50b2d43b66.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 24,
+      "title": "Creative Design 7",
+      "category": "creatives",
+      "image": "/src/assets/images/b336dcbfa5262d766b8da61b13546a8e.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 25,
+      "title": "Creative Design 8",
+      "category": "creatives",
+      "image": "/src/assets/images/c19a13a7038e8c8e394c5d613292ecf9.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 26,
+      "title": "Creative Design 9",
+      "category": "creatives",
+      "image": "/src/assets/images/c6e4187a82fe16a52e81345732ae25c0.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 27,
+      "title": "Creative Design 10",
+      "category": "creatives",
+      "image": "/src/assets/images/f072ab9ab37c8888b83e860369bf79f4.jpg",
+      "aspect": "aspect-square",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 28,
+      "title": "Motion Graphic 4",
+      "category": "motion",
+      "youtubeId": "Sy_H1axLJDA",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 29,
+      "title": "Motion Graphic 5",
+      "category": "motion",
+      "youtubeId": "HPE1lws3V4Q",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 30,
+      "title": "Motion Graphic 6",
+      "category": "motion",
+      "youtubeId": "HPE1lws3V4Q",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 31,
+      "title": "AI Video 4",
+      "category": "ai",
+      "youtubeId": "NTHbqiQwvbo",
+      "aspect": "aspect-[9/16]",
+      "colSpan": "col-span-1"
+    },
+    {
+      "id": 6,
+      "title": "YouTube Video 2",
+      "category": "video",
+      "aspect": "aspect-video",
+      "colSpan": "col-span-2",
+      "youtubeId": "o7KAeZrjSsg"
+    }
+  ],
+  "shortsData": [
+    {
+      "id": 1,
+      "title": "Short Content 1",
+      "tags": "#shorts #viral #editing",
+      "youtubeId": "TMk-TsADGl4"
+    },
+    {
+      "id": 2,
+      "title": "Short Content 2",
+      "tags": "#creative #vlog #transitions",
+      "youtubeId": "ttDohUd8lvI"
+    },
+    {
+      "id": 3,
+      "title": "Short Content 3",
+      "tags": "#dynamic #retention #visuals",
+      "youtubeId": "bFYzuDcIvhY"
+    }
+  ],
+  "filterButtons": [
+    {
+      "id": "all",
+      "label": "All"
+    },
+    {
+      "id": "motion",
+      "label": "Motion graphics"
+    },
+    {
+      "id": "short",
+      "label": "short form"
+    },
+    {
+      "id": "ai",
+      "label": "AI Videos"
+    },
+    {
+      "id": "video",
+      "label": "long form"
+    },
+    {
+      "id": "creatives",
+      "label": "Creatives"
+    }
+  ]
+}

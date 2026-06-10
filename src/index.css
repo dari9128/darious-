@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Open Sauce One", "Inter", sans-serif;
+  
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f4f4f5;
+  --color-gray-200: #e4e4e7;
+  --color-gray-300: #d4d4d8;
+  --color-gray-400: #a1a1aa;
+  --color-gray-500: #71717a;
+  --color-gray-600: #52525b;
+  --color-gray-700: #3f3f46;
+  --color-gray-800: #27272a;
+  --color-gray-900: #18181b;
+  --color-accent: #27272a;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 60s linear infinite;
+
+  --animate-wave-slow: wave-slow 8s ease-in-out infinite alternate;
+  --animate-wave-medium: wave-medium 10s ease-in-out infinite alternate;
+  --animate-blob: blob 12s infinite alternate ease-in-out;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes wave-slow {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    100% { transform: translate(15vw, 10vh) rotate(10deg) scale(1.1); }
+  }
+  @keyframes wave-medium {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    100% { transform: translate(-10vw, -15vh) rotate(-10deg) scale(1.15); }
+  }
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(50px, -80px) scale(1.15); }
+    66% { transform: translate(-40px, 40px) scale(0.85); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+}
+
+/* Base Styles & Resets */
+body {
+    background-color: #f8f9fa; /* Light gray theme */
+    color: #27272a;
+    overflow-x: hidden;
+    cursor: default; /* We will use custom cursor via canvas */
+}
+
+/* Glassmorphism Utilities */
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+    background: rgba(24, 24, 27, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Scroll Reveal Classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered reveals for grids */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+
+/* Sparkle Canvas Canvas Layer */
+#sparkle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Image hover zoom */
+.img-zoom-container { overflow: hidden; }
+.img-zoom-container img {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.img-zoom-container:hover img {
+    transform: scale(1.05);
+}
+
+/* Testimonial Marquee Mask */
+.marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Removed grid pattern for sleek wave background */
+
+/* Text Outline */
+.text-outline {
+    -webkit-text-stroke: 1.5px #18181b;
+    color: transparent;
+}
+
+/* Hide scrollbar for shorts container */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.font-cursive {
+    font-family: 'Caveat', cursive;
+}
+
+/* Removed old animations */
