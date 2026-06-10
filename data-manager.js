@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -474,6 +475,60 @@ async function manageSkills() {
 }
 
 // ==========================================
+// 4. DEPLOY CHANGES (GIT COMMIT & PUSH)
+// ==========================================
+async function deployChanges() {
+  console.clear();
+  console.log(`${COLORS.cyan}${COLORS.bold}======================================`);
+  console.log(`📦 DEPLOY CHANGES TO REMOTE REPOSITORY`);
+  console.log(`======================================${COLORS.reset}`);
+
+  try {
+    // Check git status
+    const status = execSync('git status --porcelain').toString().trim();
+    if (!status) {
+      console.log(`${COLORS.yellow}No local changes detected to commit.${COLORS.reset}`);
+      
+      const confirmPush = await askQuestion('Would you like to try pushing anyway? (y/n): ');
+      if (confirmPush.toLowerCase() === 'y') {
+        const branchName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+        console.log(`${COLORS.blue}Running: git push origin ${branchName}...${COLORS.reset}`);
+        execSync(`git push origin ${branchName}`, { stdio: 'inherit' });
+        console.log(`\n${COLORS.green}✔ Push operation completed!${COLORS.reset}`);
+      }
+      await askQuestion('\nPress Enter to continue...');
+      return;
+    }
+
+    console.log(`${COLORS.bold}Local Changes Detected:${COLORS.reset}`);
+    console.log(status);
+    console.log(`--------------------------------------`);
+
+    const confirm = await askQuestion('Are you sure you want to deploy (Commit & Push) these changes? (y/n): ');
+    if (confirm.toLowerCase() === 'y') {
+      console.log(`\n${COLORS.blue}Running: git add .${COLORS.reset}`);
+      execSync('git add .', { stdio: 'inherit' });
+
+      const commitMsg = `Database update via TUI: ${new Date().toISOString()}`;
+      console.log(`${COLORS.blue}Running: git commit -m "${commitMsg}"${COLORS.reset}`);
+      execSync(`git commit -m "${commitMsg}"`, { stdio: 'inherit' });
+
+      const branchName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+      console.log(`${COLORS.blue}Running: git push origin ${branchName}...${COLORS.reset}`);
+      execSync(`git push origin ${branchName}`, { stdio: 'inherit' });
+
+      console.log(`\n${COLORS.green}✔ Successfully committed and deployed to branch "${branchName}"!${COLORS.reset}`);
+    } else {
+      console.log(`\n${COLORS.yellow}Deployment cancelled.${COLORS.reset}`);
+    }
+  } catch (error) {
+    console.error(`\n${COLORS.red}Deployment failed: ${error.message}${COLORS.reset}`);
+  }
+
+  await askQuestion('\nPress Enter to continue...');
+}
+
+// ==========================================
 // MAIN LOOP
 // ==========================================
 async function main() {
@@ -485,7 +540,8 @@ async function main() {
     console.log(`1. Manage Portfolio & YouTube Works`);
     console.log(`2. Manage Client Testimonials`);
     console.log(`3. Manage Software Skills`);
-    console.log(`4. Exit`);
+    console.log(`4. Deploy Changes (Git Commit & Push)`);
+    console.log(`5. Exit`);
     console.log(`--------------------------------------`);
 
     const choice = await askQuestion('Select an option: ');
@@ -497,6 +553,8 @@ async function main() {
     } else if (choice === '3') {
       await manageSkills();
     } else if (choice === '4') {
+      await deployChanges();
+    } else if (choice === '5') {
       console.log(`\n${COLORS.bold}Goodbye!${COLORS.reset}\n`);
       rl.close();
       break;
