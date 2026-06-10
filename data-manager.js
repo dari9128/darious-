@@ -107,15 +107,38 @@ async function managePortfolio() {
       await askQuestion('\nPress Enter to continue...');
     } else if (choice === '2') {
       console.log(`\n${COLORS.bold}Add Portfolio Item:${COLORS.reset}`);
-      const title = await askQuestion('Enter Title: ');
-      const category = await askQuestion('Enter Category (motion / short / ai / video / creatives): ');
-      const youtubeIdInput = await askQuestion('Enter YouTube Video URL or ID (leave blank for image): ');
-      const image = await askQuestion('Enter Image Path/URL (leave blank for video): ');
-      const aspect = await askQuestion('Enter Aspect Ratio (aspect-[9/16] / aspect-video / aspect-square): ');
-      const colSpan = await askQuestion('Enter Column Span (col-span-1 / col-span-2): ');
+      const category = await askQuestion('Enter Category (all / motion / short / ai / video / creatives): ');
+      
+      let title, youtubeIdInput, image, aspect, colSpan;
+      
+      if (category.toLowerCase().trim() === 'all') {
+        const sourceIdStr = await askQuestion('Enter the ID of the existing item to add to the "All" category: ');
+        const sourceId = parseInt(sourceIdStr, 10);
+        const sourceItem = data.portfolioItems.find(item => item.id === sourceId);
+        
+        if (!sourceItem) {
+          console.log(`${COLORS.red}Error: Item with ID ${sourceId} not found.${COLORS.reset}`);
+          await askQuestion('Press Enter to continue...');
+          continue;
+        }
+        
+        title = sourceItem.title;
+        youtubeIdInput = sourceItem.youtubeId || '';
+        image = sourceItem.image || '';
+        aspect = sourceItem.aspect;
+        colSpan = sourceItem.colSpan;
+        
+        console.log(`${COLORS.green}Loaded details from item [ID ${sourceId}]: "${title}"${COLORS.reset}`);
+      } else {
+        title = await askQuestion('Enter Title: ');
+        youtubeIdInput = await askQuestion('Enter YouTube Video URL or ID (leave blank for image): ');
+        image = await askQuestion('Enter Image Path/URL (leave blank for video): ');
+        aspect = await askQuestion('Enter Aspect Ratio (aspect-[9/16] / aspect-video / aspect-square): ');
+        colSpan = await askQuestion('Enter Column Span (col-span-1 / col-span-2): ');
+      }
 
       const nextId = data.portfolioItems.reduce((max, item) => Math.max(max, item.id), 0) + 1;
-      const newItem = { id: nextId, title, category, aspect, colSpan };
+      const newItem = { id: nextId, title, category: category.toLowerCase().trim(), aspect, colSpan };
       
       if (youtubeIdInput) newItem.youtubeId = extractYoutubeId(youtubeIdInput);
       if (image) newItem.image = image;

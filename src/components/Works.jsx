@@ -276,10 +276,6 @@ export default function Works({ onItemClick }) {
         {/* Single Consolidated Grid Layout */}
         <div ref={parent} className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1.5 grid-flow-dense pb-16" id="portfolio-grid">
           {PORTFOLIO_ITEMS.filter(item => {
-            if (filter === 'all') {
-              // Only show the top 6 items (4 shorts, 2 videos) for the "All" view
-              return [1, 2, 3, 4, 5, 6].includes(item.id);
-            }
             return item.category === filter;
           }).map(item => (
             <div
