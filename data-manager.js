@@ -44,10 +44,16 @@ function loadJson(filePath) {
   }
 }
 
-function saveJson(filePath, data) {
+// Global log to track local changes during the TUI session
+let localChangesLog = [];
+
+function saveJson(filePath, data, changeDescription = '') {
   try {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
     console.log(`${COLORS.green}✔ Changes saved successfully to ${path.basename(filePath)}${COLORS.reset}\n`);
+    if (changeDescription) {
+      localChangesLog.push(changeDescription);
+    }
     return true;
   } catch (error) {
     console.error(`${COLORS.red}Error writing to ${filePath}: ${error.message}${COLORS.reset}`);
@@ -145,7 +151,7 @@ async function managePortfolio() {
       if (image) newItem.image = image;
 
       data.portfolioItems.push(newItem);
-      saveJson(PATHS.portfolio, data);
+      saveJson(PATHS.portfolio, data, `Added portfolio item "${title}" to category "${category.toLowerCase().trim()}"`);
       await askQuestion('Press Enter to continue...');
     } else if (choice === '3') {
       console.log(`\n${COLORS.bold}Update Portfolio Item:${COLORS.reset}`);
@@ -192,7 +198,7 @@ async function managePortfolio() {
       const newColSpan = await askQuestion(`ColSpan [${item.colSpan}]: `);
       if (newColSpan) item.colSpan = newColSpan;
 
-      saveJson(PATHS.portfolio, data);
+      saveJson(PATHS.portfolio, data, `Updated portfolio item "${item.title}" (ID: ${item.id})`);
       await askQuestion('Press Enter to continue...');
     } else if (choice === '4') {
       console.log(`\n${COLORS.bold}Delete Portfolio Item:${COLORS.reset}`);
@@ -210,7 +216,7 @@ async function managePortfolio() {
       const confirm = await askQuestion(`Are you sure you want to delete "${item.title}"? (y/n): `);
       if (confirm.toLowerCase() === 'y') {
         data.portfolioItems.splice(itemIndex, 1);
-        saveJson(PATHS.portfolio, data);
+        saveJson(PATHS.portfolio, data, `Deleted portfolio item "${item.title}"`);
       }
       await askQuestion('Press Enter to continue...');
     } else if (choice === '5') {
@@ -239,7 +245,7 @@ async function managePortfolio() {
           const label = await askQuestion('Enter Display Label (e.g. Motion Graphics): ');
           if (id && label) {
             data.filterButtons.push({ id, label });
-            saveJson(PATHS.portfolio, data);
+            saveJson(PATHS.portfolio, data, `Added category "${label}"`);
           }
           await askQuestion('Press Enter to continue...');
         } else if (catChoice === '3') {
@@ -255,7 +261,7 @@ async function managePortfolio() {
             if (newId) btn.id = newId;
             const newLabel = await askQuestion(`Label [${btn.label}]: `);
             if (newLabel) btn.label = newLabel;
-            saveJson(PATHS.portfolio, data);
+            saveJson(PATHS.portfolio, data, `Updated category "${btn.label}"`);
           }
           await askQuestion('Press Enter to continue...');
         } else if (catChoice === '4') {
@@ -273,7 +279,7 @@ async function managePortfolio() {
               const confirm = await askQuestion(`Delete category "${btn.label}"? (y/n): `);
               if (confirm.toLowerCase() === 'y') {
                 data.filterButtons.splice(idx, 1);
-                saveJson(PATHS.portfolio, data);
+                saveJson(PATHS.portfolio, data, `Deleted category "${btn.label}"`);
               }
             }
           }
@@ -324,7 +330,7 @@ async function manageTestimonials() {
 
       const newTestimonial = { text, name, role, avatar };
       data.push(newTestimonial);
-      saveJson(PATHS.testimonials, data);
+      saveJson(PATHS.testimonials, data, `Added testimonial from "${name}"`);
       await askQuestion('Press Enter to continue...');
     } else if (choice === '3') {
       console.log(`\n${COLORS.bold}Update Testimonial:${COLORS.reset}`);
@@ -352,7 +358,7 @@ async function manageTestimonials() {
       const newAvatar = await askQuestion(`Avatar [${t.avatar}]: `);
       if (newAvatar) t.avatar = newAvatar;
 
-      saveJson(PATHS.testimonials, data);
+      saveJson(PATHS.testimonials, data, `Updated testimonial from "${t.name}"`);
       await askQuestion('Press Enter to continue...');
     } else if (choice === '4') {
       console.log(`\n${COLORS.bold}Delete Testimonial:${COLORS.reset}`);
@@ -369,7 +375,7 @@ async function manageTestimonials() {
       const confirm = await askQuestion(`Are you sure you want to delete testimonial by "${t.name}"? (y/n): `);
       if (confirm.toLowerCase() === 'y') {
         data.splice(index, 1);
-        saveJson(PATHS.testimonials, data);
+        saveJson(PATHS.testimonials, data, `Deleted testimonial from "${t.name}"`);
       }
       await askQuestion('Press Enter to continue...');
     } else if (choice === '5') {
@@ -420,7 +426,7 @@ async function manageSkills() {
       if (isBlenderLogo.toLowerCase() === 'y') newSkill.isBlenderLogo = true;
 
       data.push(newSkill);
-      saveJson(PATHS.skills, data);
+      saveJson(PATHS.skills, data, `Added skill "${name}"`);
       await askQuestion('Press Enter to continue...');
     } else if (choice === '3') {
       console.log(`\n${COLORS.bold}Update Skill:${COLORS.reset}`);
@@ -448,7 +454,7 @@ async function manageSkills() {
       const newBgClass = await askQuestion(`bgClass [${s.bgClass || 'none'}]: `);
       if (newBgClass) s.bgClass = newBgClass;
 
-      saveJson(PATHS.skills, data);
+      saveJson(PATHS.skills, data, `Updated skill "${s.name}"`);
       await askQuestion('Press Enter to continue...');
     } else if (choice === '4') {
       console.log(`\n${COLORS.bold}Delete Skill:${COLORS.reset}`);
@@ -465,7 +471,7 @@ async function manageSkills() {
       const confirm = await askQuestion(`Are you sure you want to delete skill "${s.name}"? (y/n): `);
       if (confirm.toLowerCase() === 'y') {
         data.splice(index, 1);
-        saveJson(PATHS.skills, data);
+        saveJson(PATHS.skills, data, `Deleted skill "${s.name}"`);
       }
       await askQuestion('Press Enter to continue...');
     } else if (choice === '5') {
@@ -509,13 +515,18 @@ async function deployChanges() {
       console.log(`\n${COLORS.blue}Running: git add .${COLORS.reset}`);
       execSync('git add .', { stdio: 'inherit' });
 
-      const commitMsg = `Database update via TUI: ${new Date().toISOString()}`;
+      const commitMsg = localChangesLog.length > 0
+        ? `TUI: ${localChangesLog.join('; ')}`
+        : `Database update via TUI: ${new Date().toISOString()}`;
       console.log(`${COLORS.blue}Running: git commit -m "${commitMsg}"${COLORS.reset}`);
       execSync(`git commit -m "${commitMsg}"`, { stdio: 'inherit' });
 
       const branchName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
       console.log(`${COLORS.blue}Running: git push origin ${branchName}...${COLORS.reset}`);
       execSync(`git push origin ${branchName}`, { stdio: 'inherit' });
+
+      // Clear the changes log on success
+      localChangesLog = [];
 
       console.log(`\n${COLORS.green}✔ Successfully committed and deployed to branch "${branchName}"!${COLORS.reset}`);
     } else {
